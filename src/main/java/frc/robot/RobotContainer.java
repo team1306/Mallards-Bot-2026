@@ -53,7 +53,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Control the drive system using the arcade drive method bound to the left joystick
+    // Control the drive system using the arcade drive method using the left joystick
     driveSubsystem.setDefaultCommand(driveSubsystem.driveArcade(
       driveSubsystem, () -> -driverController.getLeftY(), () -> -driverController.getLeftX()
     ));
