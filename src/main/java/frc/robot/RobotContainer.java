@@ -4,8 +4,15 @@
 
 package frc.robot;
 
+import static edu.wpi.first.units.Units.RotationsPerSecond;
+
+import java.util.function.Supplier;
+
+import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
@@ -21,6 +28,7 @@ import frc.robot.subsystems.*;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+  private final shooter shooter = new shooter();
   // The robot's subsystems
   private final DriveTrain driveSubsystem = new DriveTrain();
 
@@ -36,7 +44,8 @@ public class RobotContainer {
    */
   public RobotContainer() {
     configureBindings();
-  }
+
+    }
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be
@@ -56,7 +65,11 @@ public class RobotContainer {
     // Control the drive system using the arcade drive method using the left joystick
     driveSubsystem.setDefaultCommand(driveSubsystem.driveArcade(
       driveSubsystem, () -> -driverController.getLeftY(), () -> -driverController.getLeftX()
-    ));
+
+    )
+    );
+    Supplier<AngularVelocity> dSupplier = () -> RotationsPerSecond.of(SmartDashboard.getNumber("shooter speed", 0));
+    driverController.b().whileTrue(Commands.startEnd(() -> shooter.SpinUp(dSupplier), () -> shooter.StopMotor(), shooter));
   }
 
   /**
