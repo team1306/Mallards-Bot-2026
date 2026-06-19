@@ -44,7 +44,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     configureBindings();
-
+    SmartDashboard.putNumber("shooter speed", 0);
     }
 
   /**

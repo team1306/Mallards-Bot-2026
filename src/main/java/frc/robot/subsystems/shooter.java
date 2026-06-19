@@ -1,4 +1,5 @@
 package frc.robot.subsystems;
+import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.controls.VelocityVoltage;
@@ -16,14 +17,14 @@ import java.util.function.Supplier;
 
 public class shooter extends SubsystemBase
 {
-    TalonFX motor1 = new TalonFX(1);
-    TalonFX motor2 = new TalonFX(2);
+    TalonFX motor1 = new TalonFX(5, new CANBus("Test Bed CANivore"));
+    TalonFX motor2 = new TalonFX(6, new CANBus("Test Bed CANivore"));
 
     public shooter(){    
         TalonFXConfiguration config = new TalonFXConfiguration();
         config.MotorOutput.withNeutralMode(NeutralModeValue.Coast).withInverted(InvertedValue.Clockwise_Positive);
         config.CurrentLimits.withSupplyCurrentLimitEnable(true).withSupplyCurrentLimit(Amp.of(100));
-        config.Slot0.withKP(1);
+        config.Slot0.withKP(10);
         motor1.getConfigurator().apply(config);
         motor2.getConfigurator().apply(config);
     }
