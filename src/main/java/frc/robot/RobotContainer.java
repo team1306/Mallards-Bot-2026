@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.*;
 
 /**
@@ -29,12 +28,13 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
   private final shooter shooter = new shooter();
+  private final Indexer indexer = new Indexer();
   // The robot's subsystems
   private final DriveTrain driveSubsystem = new DriveTrain();
 
   // The driver's controller
   private final CommandXboxController driverController = new CommandXboxController(
-      OperatorConstants.DRIVER_CONTROLLER_PORT);
+      0);
 
   // The autonomous chooser
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
@@ -70,6 +70,8 @@ public class RobotContainer {
     );
     Supplier<AngularVelocity> dSupplier = () -> RotationsPerSecond.of(SmartDashboard.getNumber("shooter speed", 0));
     driverController.b().whileTrue(Commands.startEnd(() -> shooter.SpinUp(dSupplier), () -> shooter.StopMotor(), shooter));
+
+    driverController.a().whileTrue(Commands.startEnd(() -> indexer.setDutyCycle(0.01), () -> indexer.setDutyCycle(0), indexer));
   }
 
   /**

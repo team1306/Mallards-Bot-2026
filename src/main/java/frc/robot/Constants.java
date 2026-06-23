@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.CANBus;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean
@@ -17,28 +19,17 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static final class DriveConstants {
-    public static final int LEFT_LEADER_ID = 1;
-    public static final int LEFT_FOLLOWER_ID = 2;
-    public static final int RIGHT_LEADER_ID = 3;
-    public static final int RIGHT_FOLLOWER_ID = 4;
+    public static final int LEFT_DRIVE_LEADER_ID = 1;
+    public static final int LEFT_DRIVE_FOLLOWER_ID = 2;
+    public static final int RIGHT_DRIVE_LEADER_ID = 3;
+    public static final int RIGHT_DRIVE_FOLLOWER_ID = 4;
 
     public static final int DRIVE_MOTOR_CURRENT_LIMIT = 60;
-  }
 
-  public static final class ShooterConstants {
-    public static final int SHOOTER_MOTOR_ID_1 = 5;
-    public static final int SHOOTER_MOTOR_ID_2 = 6;
-    public static final int SHOOTER_MOTOR_CURRENT_LIMIT = 60;
-    public static final double SHOOTER_MOTOR_VOLTAGE_COMP = 10;
-    public static final double ROLLER_EJECT_VALUE = 0.44;
-  }
+    public static final CANBus CAN_BUS = new CANBus("Test Bed CANivore");
 
-  public static final class IndexerConstants {
+    public static final int SHOOTER_MOTOR_1_ID = 5;
+    public static final int SHOOTER_MOTOR_2_ID = 6;
+
     public static final int INDEXER_MOTOR_ID = 7;
-  }
-
-  public static final class OperatorConstants {
-    public static final int DRIVER_CONTROLLER_PORT = 0;
-  }
 }
