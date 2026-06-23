@@ -71,7 +71,7 @@ public class RobotContainer {
     Supplier<AngularVelocity> dSupplier = () -> RotationsPerSecond.of(SmartDashboard.getNumber("shooter speed", 0));
     driverController.b().whileTrue(Commands.startEnd(() -> shooter.SpinUp(dSupplier), () -> shooter.StopMotor(), shooter));
 
-    driverController.a().whileTrue(Commands.startEnd(() -> indexer.setDutyCycle(0.01), () -> indexer.setDutyCycle(0), indexer));
+    driverController.a().whileTrue(Commands.startEnd(() -> indexer.setDutyCycle(0.05), () -> indexer.setDutyCycle(0), indexer));
   }
 
   /**

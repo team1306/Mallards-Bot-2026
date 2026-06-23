@@ -27,7 +27,7 @@ public class Indexer extends SubsystemBase {
         .withStatorCurrentLimit(Amps.of(50))
         .withStatorCurrentLimitEnable(true))
       .withMotorOutput(new MotorOutputConfigs()
-        .withInverted(InvertedValue.Clockwise_Positive)
+        .withInverted(InvertedValue.CounterClockwise_Positive)
         .withNeutralMode(NeutralModeValue.Brake));
 
     motor.getConfigurator().apply(config);
